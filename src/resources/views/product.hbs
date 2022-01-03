@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{type_name.type}}</title>
+</head>
+<body>
+    {{>nav}}
+    <div class="product-sort-bar">
+        <div class="product-bar-box mx-auto">
+            <div class="float-start product-bar-title fw-bold">
+                Sản phẩm
+            </div>
+            <div class="float-end sortFields" style = "font-size: 14px; position: relative">
+                <div class="sortBySizeDiv SortFieldDiv">
+                    <div class="sortBySize sortDiv">
+                        <p class = "sortBySizeP">Kích cỡ 
+                            <span class = "normal-span">
+                                <i class="caret caret-sbs fas fa-caret-down"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class = "sortBySizeList sortList">
+                        <label class = "sizeList">
+                            <input type="checkbox" class = "size" name = "size" value = "XS">XS
+                        </label>
+                        <label class = "sizeList">
+                            <input type="checkbox" class = "size" name = "size" value = "S" >S
+                        </label>
+                        <label class = "sizeList">
+                            <input type="checkbox" class = "size" name = "size" value = "M" >M
+                        </label>
+                        <label class = "sizeList">
+                            <input type="checkbox" class = "size" name = "size" value = "L" >L
+                        </label>
+                         <label class = "sizeList">
+                            <input type="checkbox" class = "size" name = "size" value = "XL" >XL
+                        </label>
+                         <label class = "sizeList">
+                            <input type="checkbox" class = "size" name = "size" value = "2XL" >2XL
+                        </label>
+                    </div>
+                </div>
+
+
+                <div class="sortByCustomeDiv SortFieldDiv">
+                    <div class="sortByCustome sortDiv">
+                        <p class = "sortBySizeP">Sắp xếp 
+                            <span class = "normal-span">
+                                <i class="caret caret-sbc fas fa-caret-down"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class = "sortByCustomeList sortList">
+                        <div class="sizeList" data-value = "newest">
+                            <p class = "custome-order">Mới nhất</p>
+                        </div>
+                        <div class="sizeList" data-value = "bestseller">
+                            <p class = "custome-order">Bán chạy</p>
+                        </div>
+                        <div class="sizeList" data-value = "lowToHighPrice">
+                            <p class = "custome-order">Giá thấp đến cao</p>
+                        </div>
+                        <div class="sizeList" data-value = "highToLowPrice">
+                            <p class = "custome-order">Giá cao đến thấp</p>
+                        </div>
+                        <div class="sizeList" data-value = "sale">
+                            <p class = "custome-order">% giảm giá nhiều</p>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+    <div class="collection-lists mx-auto">
+        <div class="category-container">
+            <div class="category-title fw-bold">
+                {{type_name.type}}
+            </div>
+            <div class="category-grid">
+                <div class="row">
+                    {{#if type_products includeZero=false}}
+                    {{#each type_products}}
+                    <a class="category-card col-md-3">
+                        <div class="card-main">
+                            <div class="card-img">
+                                <img src="https://mcdn2-coolmate.cdn.vccloud.vn/uploads/{{this.main_img}}"
+                                alt="" class = "main-card-img" style = "width: 100%">
+                                <img src="https://mcdn2-coolmate.cdn.vccloud.vn/uploads/{{this.hover_img}}" class = "card-img-hover" style = "width: 100%">
+                                <div class="card-tag {{this.state}}-tag fw-bold">
+                                    <span style = "display: none;"></span>
+                                </div>
+                                <div class="card-rating">
+                                    <div class="review-rating-star {{setStar this.review_star 1}}"></div>
+                                    <div class="review-rating-star {{setStar this.review_star 2}}"></div>
+                                    <div class="review-rating-star {{setStar this.review_star 3}}"></div>
+                                    <div class="review-rating-star {{setStar this.review_star 4}}"></div>
+                                    <div class="review-rating-star {{setStar this.review_star 5}}"></div>
+                                </div>
+                                <div class="card-size mx-auto">
+                                    <div class="card-size-available">
+                                        <p>S</p>
+                                    </div>
+                                    <div class="card-size-available">
+                                        <p>M</p>
+                                    </div>
+                                    <div class="card-size-available">
+                                        <p>L</p>
+                                    </div>
+                                    <div class="card-size-available">
+                                        <p>XL</p>
+                                    </div>
+                                    <div class="card-size-available">
+                                        <p>2XL</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-description mt-3">
+                            <div class="card-item-title fw-bold">
+                                {{this.name}} - {{this.color}}
+                            </div>
+                            <div class = "card-item-price saled">
+                                {{#if this.is_sale}}
+                                <div class="currentPrice text-danger me-3">
+                                    <p>{{this.price_after_sale}}.000đ</p>
+                                </div>
+                                <div class="delPrice text-muted ">
+                                    <del>{{this.price_default}}.000đ</del>
+                                </div>
+                                <div class="salePrice text-danger ms-3">
+                                    <p>-{{this.percent_sale}}%</p>
+                                </div>
+                                {{else}}
+                                <div class="currentPrice text-body me-3">
+                                    <p>{{this.price_default}}.000đ</p>
+                                </div>
+                                {{/if}}
+                            </div>
+                            <div class = "btn btn-outline-primary doubleSale">
+                                Mua 2 chiếc chỉ {{this.price_double_sale}}k/chiếc
+                            </div>
+                        </div>
+                    </a>
+                    {{/each}}
+                    {{else}}
+                    <p>Chưa có sản phẩm nào hết</p>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{>footer}}
+</body>
+</html>

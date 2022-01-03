@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm sản phẩm</title>
+</head>
+<body>
+    {{>nav}}
+    <div class="mt-4 add-container mx-auto">
+        <h3>Thêm sản phẩm</h3>
+        <form method = "POST">
+            <input type="text" name = "name" class = "add-pd-input namePd-input" placeholder= "Tên sản phẩm" required>
+            <select class = "add-pd-input collection-select" name = "category" required>
+                <option>Chọn loại</option>
+                <option value="Áo">Áo</option>
+                <option value="Quần">Quần</option>
+                <option value="Phụ kiện">Phụ kiện</option>
+            </select>
+            <select name = "category" class = "add-pd-input category-select" id = "category-select" required>
+                <option>Chọn thể loại</option>
+                {{#each product_typeOfShirts}}
+                <option value="{{this.type}}" class = "shirtOption">{{this.type}}</option>
+                {{/each}}
+                {{#each product_typeOfTrousers}}
+                <option value="{{this.type}}" class = "trouserOption">{{this.type}}</option>
+                {{/each}}
+                {{#each product_typeOfAccessories}}
+                <option value="{{this.type}}" class = "accessoryOption">{{this.type}}</option>
+                {{/each}}
+                <option value="new_type">Khác</option>
+            </select>
+            <input type="text" name = "123" class = "add-pd-input category-input" placeholder= "Thể loại khác">
+            <br>
+            <input type="text" name = "main_img" class = "add-pd-input linkImg-input" placeholder= "Link ảnh gốc" required>
+            <input type="text" name = "hover_img" class = "add-pd-input linkImg-input" placeholder= "Link ảnh phụ" required>
+            <select type="text" name = "color" class = "add-pd-input color-select" required>
+                <option value="">Chọn màu</option>
+                {{#each product_colors}}
+                <option value="{{this.type}}">{{this.type}}</option>
+                {{/each}}
+                <option value="new_color">Khác</option>
+            </select>
+            <br>
+            <div class="new-color different-type">
+                <input type="text" class = "add-pd-input color-input" style = "width: 20%;" placeholder= "Màu khác">
+                <input type="text" name = "color_img" class = "add-pd-input" style = "width: 20%;" placeholder= "Link ảnh của màu">
+            </div>
+            <input type="number" name = "quantity_in_stock" class = "add-pd-input" style = "width: 20%;" placeholder= "Số lượng có trong kho" required>
+            <input type="number" name = "price_default" class = "add-pd-input priceSale-input" placeholder= "Giá gốc (nghìn đồng)" required>
+            <select class="add-pd-input sale-select" name = "is_sale">
+                <option value="false" selected>Không sale</option>
+                <option value="true">Sale</option>
+            </select>
+            <select class = "add-pd-input tag-select" name = "state">
+                <option value="new">New</option>
+                <option value="hot">Hot</option>
+                <option value="sale">Sale</option>
+                <option value="none">Không</option>
+            </select>
+            <br>
+            <input type="number" name = "price_double_sale" style = "width: 26%" class = "add-pd-input" placeholder="Giá mua từ 2 trở lên (nghìn đồng)" required>
+            <div class="saledPrice-div" style = "display: inline;">
+                <input type="number" name = "percent_sale" style = "width: 15.2%" class = "add-pd-input saledPrice" placeholder= "Sale (phần trăm)">
+                <input type="number" name = "price_after_sale" style = "width: 21%" class = "add-pd-input saledPrice" placeholder= "Giá sau sale (nghìn đồng)">
+            </div>
+            <br>
+            <button type = "submit" class = "btn btn-primary addPd-button">Thêm sản phẩm</button>
+        </form>
+</div>
+</body>
+</html>

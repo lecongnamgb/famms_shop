@@ -1,0 +1,195 @@
+
+<nav class = "navbar navbar-expand bg-white navbar-light ms-nav">
+    <div class="container-fluid">
+        <a class="navbar-brand ps-nav">
+           <img src="/img/logo.png" alt="logo.png" style= "width: 250px">
+        </a>
+        <div type = "button" class="menu-btn me-3 nav-hbg" data-bs-toggle="collapse" data-bs-target= ".nav-mobile">
+            <div class="menu-btn__burger-top">
+            </div>
+            <div class="menu-btn__burger-middle">
+            </div>
+            <div class="menu-btn__burger-bottom">
+            </div>
+        </div>
+        <ul class="navbar-nav desktop-nav">
+            <li class="nav-item"> 
+                <a class="item-link text-body" href="/">TRANG CHỦ</a>
+            </li>
+            <li class="nav-item">
+                <div class="item-link productDiv text-body" id = "prdDiv">
+                    <span class = "normal-span">SẢN PHẨM <i class="fas fa-caret-down"></i></span> 
+                    <div class = "productDropDown" id = "prdDD">
+                        <div class="prdDD-listItem">
+                            <div class="productTypeTitle type1">
+                                <p>Áo</p>
+                                <div class="productTypeDropDown type1DropDown">
+                                    <div class="prdDD-listItem">
+                                        {{#if product_typeOfShirts includeZero = false }}
+                                        {{#each product_typeOfShirts}}
+                                        <div class="prdTDD-listItem">
+                                            <a href = "/product/{{this.type}}">{{this.type}}</a>
+                                        </div>
+                                        {{/each}}
+                                        {{else}}
+                                            <div class="prdTDD-listItem">
+                                                <p>Chưa có gì</p>
+                                            </div>
+                                        {{/if}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="productTypeTitle type2">
+                                <p>Quần</p>
+                                <div class="productTypeDropDown type2DropDown">
+                                    <div class="prdDD-listItem">
+                                        <div class="prdTDD-listItem">
+                                            {{#if product_typeOfTrousers includeZero = false }}
+                                            {{#each product_typeOfTrousers}}
+                                            <div class="prdTDD-listItem">
+                                                <a href = "/product/{{this.type}}">{{this.type}}</a>
+                                            </div>
+                                            {{/each}}
+                                            {{else}}
+                                            <div class="prdTDD-listItem">
+                                                <p>Chưa có gì</p>
+                                            </div>
+                                            {{/if}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="productTypeTitle type3">
+                                <p>Phụ kiện</p>
+                                <div class="productTypeDropDown type3DropDown">
+                                    <div class="prdDD-listItem">
+                                        {{#if product_typeOfAccessories includeZero = false }}
+                                        {{#each product_typeOfAccessories}}
+                                        <div class="prdTDD-listItem">
+                                            <a href = "/product/{{this.type}}">{{this.type}}</a>
+                                        </div>
+                                        {{/each}}
+                                        {{else}}
+                                        <div class="prdTDD-listItem">
+                                            <p>Chưa có gì</p>
+                                        </div>
+                                        {{/if}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="item-link text-body" href="">BLOG</a>
+            </li>
+            <li class="nav-item">
+                <a class="item-link text-body" href="">LIÊN HỆ</a>
+            </li>
+            <li class="nav-item">
+                <a class="item-link text-body" href="">VỀ CHÚNG TÔI</a>
+            </li>
+             <li class="nav-item">
+                <form class = "d-flex search-form">
+                    <input type="email" name = "Search" placeholder="Tìm kiếm...">
+                    <div class="item-link text-body search-button" href=""><i class="fas fa-search"></i></div>
+                </form>
+            </li>
+            <li class="nav-item">
+                <div class="userIconDiv item-link text-body" data-user-id = "{{user._id}}">
+                    {{#if user_information.name}}
+                    <a href="/profile/{{user._id}}"><i class="far fa-user-circle"></i></a>
+                    {{else}}
+                    <i class="fas fa-user userIcon"></i>
+                    {{/if}}
+                </div>
+            </li>
+      </ul>
+    </div>
+</nav>
+<ul class="collapse nav-mobile text-center align-middle">
+   <li><a href="">TRANG CHỦ</a></li>
+   <li><a href="">SẢN PHẨM</a></li>
+   <li><a href="">BLOG</a></li>
+   <li><a href="">LIÊN HỆ</a></li>
+   <li><a href="">VỀ CHÚNG TÔI</a></li>
+   <li><div class = "userIcon"><i class="fas fa-user"></i></div></li>
+</ul>    
+
+<div class="logInAndLogOut-modal modals">
+    <div class="logInAndLogOut-table table-modal mx-auto">
+        <div class = "logIn">
+            <div class = "close-logInAndLogOut float-end close">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="logIn-box  box-modal mx-auto">
+                <div class="title-modal fw-bold ">
+                    Đăng nhập
+                </div>
+                <div class="description-modal">
+                    Nếu đã từng mua hàng trên Website trước đây, bạn có thể dùng tính năng <span class = "text-primary normal-span forgetPw-link link">"Lấy mật khẩu"</span> để có thể truy cập vào tài khoản bằng email nhé.
+                </div>
+                <div class = "input-modal">
+                    <form class = "form-sample form-logIn" method = "POST" action = "/profile">
+                        <input type="text" name = "username" placeholder="Tài khoản">
+                        <br>
+                        <input type="password" name = "password" placeholder="Mật khẩu">
+                        <button type = "submit">Đăng nhập</button>
+                    </form>
+                </div>
+                <div>
+                    <div class = "link signIn-link float-start text-primary">Đăng ký tài khoản mới</div>
+                    <div class = "link forgetPw-link float-end text-primary">Quên mật khẩu</div>
+                </div>
+            </div>
+        </div>
+
+        <div class = "signIn">
+            <div class = "close-logInAndLogOut float-end close">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="signIn-box  box-modal mx-auto">
+                <div class="title-modal fw-bold ">
+                    Đăng ký
+                </div>
+                <div class="description-modal">
+                    Nếu đã từng mua hàng trên Website trước đây, bạn có thể dùng tính năng <span class = "text-primary normal-span link forgetPassword-link">"Lấy mật khẩu"</span> để có thể truy cập vào tài khoản bằng email nhé.
+                </div>
+                <div class = "input-modal">
+                    <form class = "form-sample form-logIn" method = "POST" action = "/signIn">
+                        <input type="text" name = "username" placeholder="Tài khoản" required>
+                        <br>
+                        <input type="text" name = "sdt" placeholder="SĐT của bạn" required>
+                        <br>
+                        <input type="email" name = "email" placeholder="Email của bạn" required>
+                        <br>
+                        <input type="password" name = "password" placeholder="Mật khẩu" required>
+                        <br>
+                        <input type="password" name = "confirmPw" placeholder="Nhập lại mật khẩu" required>
+                        <button>Đăng ký</button>
+                    </form>
+                </div>
+                <div>
+                    <div class = "text-primary link logIn-link">Đăng nhập</div>
+                </div>
+            </div>
+        </div>
+         <div class = "forgetPw">
+            <div class = "close-logInAndLogOut float-end close">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="forgetPw-box  box-modal mx-auto">
+                <div class="title-modal fw-bold ">
+                    Cấp lại mật khẩu
+                </div>
+                <div class = "input-modal">
+                    <form class = "form-sample form-forgetPw" method = "POST" action = "/forgetPw">
+                        <input type="email" name = "email" placeholder="Email/SĐT của bạn">
+                        <button>Kiểm tra</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

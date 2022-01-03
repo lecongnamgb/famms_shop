@@ -1,0 +1,109 @@
+.background-news img {
+  width: 100%;
+}
+.background-news {
+  position: absolute;
+  z-index: -1;
+}
+
+.carousel {
+  position: relative;
+}
+
+.carousel-inner {
+  width: 100%;
+  height: 520px;
+  position: relative;
+  padding-top: 100px;
+}
+
+.title-news {
+  font-size: 70px;
+  font-weight: bold;
+}
+
+.text-red {
+  color: #f7444e;
+}
+
+.carousel-indicators .indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: #fff;
+}
+
+.carousel-indicators .active {
+  position: relative;
+  bottom: 3px;
+  width: 18px;
+  height: 18px;
+  background-color: #f7444e;
+}
+
+.carousel-indicators {
+  justify-content: left;
+  margin: 0;
+  margin-left: 5%;
+}
+
+// @media screen and (max-width: 992px) {
+//   .title-news {
+//     font-size: 50px;
+//   }
+//   .carousel-inner {
+//     padding-top: 70px;
+//     margin-left: -9%;
+//   }
+//   .carousel-indicators {
+//     margin-left: 5%;
+//     margin-bottom: 10%;
+//   }
+// }
+
+// @media screen and (max-width: 600px) {
+//   .title-news {
+//     font-size: 24px;
+//   }
+//   .carousel-inner {
+//     padding-top: 40px;
+//     margin-left: 10px;
+//   }
+//   .carousel-indicators {
+//     margin-bottom: 40%;
+//   }
+// }
+
+// @media screen and (max-width: 376px) {
+//   .carousel-inner {
+//     padding-top: 10px;
+//   }
+//   .carousel-indicators {
+//     margin-bottom: 10%;
+//   }
+// }
+
+// @media screen and (max-width: 415px) {
+//   .carousel-inner {
+//     padding-top: 10px;
+//   }
+//   .carousel-indicators {
+//     margin-bottom: 80%;
+//   }
+// }
+// @media screen and (max-width: 800px) {
+//   .carousel-indicators {
+//     margin-bottom: 80%;
+//   }
+//   .carousel-inner {
+//     margin-left: 0px;
+//   }
+//   .carousel-indicators {
+//     margin-left: 5%;
+//     margin-bottom: 10%;
+//   }
+// }
+
+.news {
+  height: 300px;
+}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin tài khoản của bạn</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    {{>nav}}
+    <div class = "accountPage">
+        <div class="row accountPageMain mx-auto">
+            <div class = "col-md-4">
+                <div class="leftSideProfile">
+                    <div class="title-account fw-bold">
+                        <p>{{user_information.name}}</p>
+                    </div>
+                    <div class="menu-leftSide d-inline">
+                        <a href="" class = "account-side-bar">Thông tin cá nhân</a>
+                        {{#if user.is_admin}} 
+                        <a href="/admin/add" class = "account-side-bar">Thêm sản phẩm</a>
+                        <a href="/admin/manage" class = "account-side-bar">Quản lý sản phẩm</a>
+                        {{/if}}
+                        <a href="" class = "account-side-bar">Danh sách đơn hàng</a>
+                        <a href="/logOut" class = "account-side-bar">Thoát</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="rightSideProfile">
+                    <form method = "POST" action = "/profile/{{user_information._id}}/update?_method=PUT">
+                        <div class="title-account fw-bold">
+                            <p>Thông tin cá nhân</p>
+                        </div>
+                        <div class="mainRightSide">
+                            <div class="row infoField">
+                                <div class="col-md-3 label">
+                                    Họ tên
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" name = "name" class = "input-info" placeholder="Họ tên của bạn" required value ="{{user_information.name}}">
+                                </div> 
+                            </div>
+                            <div class="row infoField">
+                                <div class="col-md-3 label">
+                                    Email
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" name = "email" class = "input-info" value = {{user_information.email}} placeholder="Email của bạn">
+                                </div> 
+                            </div>
+                            <div class="row infoField">
+                                <div class="col-md-3 label">
+                                    Số điện thoại
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" name = "phone_number" class = "input-info" value = "{{user_information.phone_number}}" placeholder="Số điện thoại của bạn" required>
+                                </div> 
+                            </div>
+                            <div class="row infoField">
+                                <div class="col-md-3 label">
+                                    Địa chỉ
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" name = "address" class = "input-info" placeholder="Địa chỉ của bạn" required value = "{{user_information.address}}">
+                                </div> 
+                            </div>
+                            <div class="row infoField">
+                                <div class="col-md-3 label">
+                                    Giới tính
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="radio" name = "gender" id = "male" value = "male" {{{setGender 'male' user_information.gender}}}>
+                                    <label for="male" class="fw-bold" style = "margin-right: 20px">Nam</label>
+                                    <input type="radio" name = "gender" id = "female" value = "female" {{{setGender 'female' user_information.gender}}}>
+                                    <label for="female" class = "fw-bold">Nữ</label>
+                                </div> 
+                            </div>
+                            <div class="row infoField">
+                                <div class="col-md-3 label">
+                                    <p>Ngày sinh</p>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="date" name = "date_of_birth" class = "input-info dob"  value = "{{{setTime user_information.date_of_birth}}}" >
+                                </div> 
+                            </div>
+                            <div class="row infoField">
+                                <div class="col-md-3 label">
+                                    <p>Chiều cao</p>
+                                </div>
+                                <div class="col-md-7">
+                                    <input type="range" name = "height" min = "140" max="185" class = "form-range height-range input-info"  value = {{user_information.height}}>
+                                </div>  
+                                <div class="col-md-1">
+                                   <label class = "height-range-label">{{user_information.height}}cm</label>
+                                </div>
+                            </div>
+                            <div class="row infoField">
+                                <div class="col-md-3 label">
+                                    <p>Cân nặng</p>
+                                </div>
+                                <div class="col-md-7">
+                                    <input type="range" name = "weight" min = "40" max="85" class = "form-range weight-range input-info" value = {{user_information.weight}}>
+                                </div>  
+                                <div class="col-md-1">
+                                   <label class = "weight-range-label">{{user_information.weight}}kg</label>
+                                </div>
+                            </div>
+                            <div class = "modifyPw-div">
+                                <a class = "modifyPw-link text-primary">Thay đổi mật khẩu</a>
+                                <div class="modifyPw-main">
+                                    <div class="row infoField">
+                                        <div class="col-md-3 label">
+                                            <p>Mật khẩu cũ</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="password" class = "input-info modifyPw-fields"  name = "oldPw" placeholder="Mật khẩu hiện tại">
+                                        </div> 
+                                    </div>
+                                    <div class="row infoField">
+                                        <div class="col-md-3 label">
+                                            <p>Mật khẩu mới</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="password" class = "input-info modifyPw-fields" name = "newPw" placeholder="Mật khẩu mới">
+                                        </div> 
+                                    </div>
+                                    <div class="row infoField">
+                                        <div class="col-md-3 label">
+                                            <p>Nhập lại mật khẩu</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="password" class = "input-info modifyPw-fields" name = "confirmPw" placeholder="Nhập lại mật khẩu">
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                            <button type = "submit" class = "submit-info-button btn btn-primary">Cập nhật tài khoản</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{> footer}}
+</body>
+<script>
+    var dob = $('.dob').attr("value").replaceAll(' ', '-');
+$('.dob').val(dob);
+</script>
+</html>
