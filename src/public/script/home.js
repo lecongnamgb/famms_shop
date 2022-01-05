@@ -81,21 +81,38 @@ function showNewSelect(selectTagName) {
     })
 }
 
-// document.addEventListener("click", (e) => {
-//     const element = $('.productDropDown');
-//     let targetElement = e.target;
-// //     if (element.css("display") == "block") {
-// //         do {
-// //             if (targetElement == element) {
-// //                 return;
-// //             }
-// //             targetElement = targetElement.parentNode;
-// //         } while (targetElement)
-        
-// //         element.hide();
-// // }
-// })
+var collection_select = $('.collection-select').val();
+var shirtOptions = $('.shirtOption');
+var trouserOptions = $('.trouserOption');
+var accessoryOptions = $('.accessoryOption')
+if (collection_select == "Áo") {
+    shirtOptions.show();
+    trouserOptions.hide();
+    accessoryOptions.hide();
+} else if (collection_select == "Quần") {
+    trouserOptions.show();
+    shirtOptions.hide();
+    accessoryOptions.hide();
+} else if (collection_select == "Phụ kiện") {
+    accessoryOptions.show();
+    trouserOptions.hide();
+    shirtOptions.hide();
+}
 
+function showOption(selectTag) {
+    let data_option = $(selectTag).attr('data-option');
+    if (data_option) {
+        $(selectTag).val(data_option);
+    }
+}
+
+if($('.sale-select').val() == "true") {
+    $('.saledPrice-div').show();
+    $('.saledPrice').attr("required", true);
+}
+
+showOption('.category-select');
+showOption('.color-select');
 
 showNewSelect('.color-select');
 
@@ -125,9 +142,9 @@ $('.collection-select').on('change', () => {
         $('.category-input').hide();
     }
     if (categoryValue == "Phụ kiện") {
-        $('.AccessoryOption').show();
+        $('.accessoryOption').show();
     } else {
-        $('.AccessoryOption').hide();
+        $('.accessoryOption').hide();
         document.getElementById("category-select").selectedIndex = "0";
         $('.category-input').hide();
     }
@@ -147,9 +164,8 @@ function showAndHideComponent(button, modalHide) {
         $(modalHide).hide();
     });
 }
-$('.saledPrice-div').hide();
+// $('.saledPrice-div').hide();
 $('.productDiv span').click(() => {
-    console.log($(this)) ;
     if ($('.productDropDown').hasClass('show')) {
         $('.productDropDown').removeClass('show');
     } else {

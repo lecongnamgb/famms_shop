@@ -18,7 +18,7 @@
                 <option value="Quần">Quần</option>
                 <option value="Phụ kiện">Phụ kiện</option>
             </select>
-            <select name = "category" class = "add-pd-input category-select" id = "category-select" required>
+            <select name = "1" class = "add-pd-input category-select" id = "category-select" required>
                 <option>Chọn thể loại</option>
                 {{#each product_typeOfShirts}}
                 <option value="{{this.type}}" class = "shirtOption">{{this.type}}</option>
@@ -61,7 +61,7 @@
             </select>
             <br>
             <input type="number" name = "price_double_sale" style = "width: 26%" class = "add-pd-input" placeholder="Giá mua từ 2 trở lên (nghìn đồng)" required>
-            <div class="saledPrice-div" style = "display: inline;">
+            <div class="saledPrice-div">
                 <input type="number" name = "percent_sale" style = "width: 15.2%" class = "add-pd-input saledPrice" placeholder= "Sale (phần trăm)">
                 <input type="number" name = "price_after_sale" style = "width: 21%" class = "add-pd-input saledPrice" placeholder= "Giá sau sale (nghìn đồng)">
             </div>

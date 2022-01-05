@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sửa thông tin sản phẩm</title>
+</head>
+<body>
+    {{>nav}}
+    <div class="mt-4 add-container mx-auto">
+        <h3>Sửa thông tin sản phẩm</h3>
+        <form method = "POST">
+            <input type="text" name = "name" class = "add-pd-input namePd-input" placeholder= "Tên sản phẩm" value = "{{product.name}}" required>
+            <select class = "add-pd-input collection-select" name = "category" required>
+                <option>Chọn loại</option>
+                <option value="Áo" {{setOptionTag product.category "Áo"}}>Áo</option>
+                <option value="Quần" {{setOptionTag product.category "Quần"}}>Quần</option>
+                <option value="Phụ kiện" {{setOptionTag product.category "Phụ kiện"}}>Phụ kiện</option>
+            </select>
+            <select name = "type" data-option = "{{product.type}}" class = "add-pd-input category-select" id = "category-select" required>
+                <option>Chọn thể loại</option>
+                {{#each product_typeOfShirts}}
+                <option value="{{this.type}}" class = "shirtOption">{{this.type}}</option>
+                {{/each}}
+                {{#each product_typeOfTrousers}}
+                <option value="{{this.type}}" class = "trouserOption">{{this.type}}</option>
+                {{/each}}
+                {{#each product_typeOfAccessories}}
+                <option value="{{this.type}}" class = "accessoryOption">{{this.type}}</option>
+                {{/each}}
+                <option value="new_type">Khác</option>
+            </select>
+            <input type="text" name = "123" class = "add-pd-input category-input" placeholder= "Thể loại khác">
+            <br>
+            <input type="text" name = "main_img" class = "add-pd-input linkImg-input" placeholder= "Link ảnh gốc" value = "{{product.main_img}}" required>
+            <input type="text" name = "hover_img" class = "add-pd-input linkImg-input" placeholder= "Link ảnh phụ" value = "{{product.hover_img}}" required>
+            <select type="text" name = "color" data-option= "{{product.color}}" class = "add-pd-input color-select" required>
+                <option value="">Chọn màu</option>
+                {{#each product_colors}}
+                <option value="{{this.type}}">{{this.type}}</option>
+                {{/each}}
+                <option value="new_color">Khác</option>
+            </select>
+            <br>
+            <div class="new-color different-type">
+                <input type="text" class = "add-pd-input color-input" style = "width: 20%;" placeholder= "Màu khác">
+                <input type="text" name = "color_img" class = "add-pd-input" style = "width: 20%;" placeholder= "Link ảnh của màu">
+            </div>
+            <input type="number" name = "quantity_in_stock" value = {{product.quantity_in_stock}} class = "add-pd-input" style = "width: 20%;" placeholder= "Số lượng có trong kho" required>
+            <input type="number" name = "price_default" value = {{product.price_default}} class = "add-pd-input priceSale-input" placeholder= "Giá gốc (nghìn đồng)" required>
+            <select class="add-pd-input sale-select" name = "is_sale">
+                <option value="false" {{setOptionTag product.is_sale false}}>Không sale</option>
+                <option value="true" {{setOptionTag product.is_sale true}}>Sale</option>
+            </select>
+            <select class = "add-pd-input tag-select" name = "state">
+                <option value="new" {{setOptionTag product.state "new"}}>New</option>
+                <option value="hot" {{setOptionTag product.state "hot"}}>Hot</option>
+                <option value="sale" {{setOptionTag product.state "sale"}}>Sale</option>
+                <option value="none" {{setOptionTag product.state "none"}}>Không</option>
+            </select>
+            <br>
+            <input type="number" name = "price_double_sale" value = "{{product.price_double_sale}}" style = "width: 26%" class = "add-pd-input" placeholder="Giá mua từ 2 trở lên (nghìn đồng)" required>
+            <div class="saledPrice-div">
+                <input type="number" name = "percent_sale" value = "{{product.percent_sale}}" style = "width: 15.2%" class = "add-pd-input saledPrice" placeholder= "Sale (phần trăm)">
+                <input type="number" name = "price_after_sale" value = "{{product.price_after_sale}}" style = "width: 21%" class = "add-pd-input saledPrice" placeholder= "Giá sau sale (nghìn đồng)">
+            </div>
+            <br>
+            <button type = "submit" class = "btn btn-primary addPd-button">Cập nhật</button>
+        </form>
+</div>
+</body>
+</html>

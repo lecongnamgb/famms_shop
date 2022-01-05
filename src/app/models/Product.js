@@ -17,7 +17,7 @@ const product = new Schema({
     hover_img: {type: String},
     state: {type: String},
     is_sale: {type: Boolean, default: false},
-    slug: {type: String, slug: ['name','color']},
+    slug: {type: String, slug: ['name','color'], unique: true},
     review_star: {type: Number, default: 5},
     category: {type: String},
     review_comment: {type: String}
@@ -25,5 +25,4 @@ const product = new Schema({
 {
     timestamps: true,
 });
-
 module.exports = mongoose.model('product', product);

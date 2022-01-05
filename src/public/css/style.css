@@ -689,3 +689,18 @@ li {
 .accessoryOption,
 .trouserOption {
   display: none; }
+
+.manage-table {
+  width: 90%; }
+
+.linkE {
+  text-decoration: underline; }
+
+.edit-link {
+  margin-right: 50px; }
+
+.link-td {
+  text-align: center; }
+
+table {
+  text-align: center; }

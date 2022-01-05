@@ -54,7 +54,18 @@ const handlebars = exphbs.create({
                     return "is-none";
                 }
             }
+      },
+      sum: (a, b) => {
+          return a + b;
+      },
+      setOptionTag: (type, currentType) => {
+          if (type == currentType) {
+              return "selected";
+          } else {
+              return;
+          } 
       }
+
   }
 });
 app.engine('.hbs', handlebars.engine);
