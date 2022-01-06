@@ -4,22 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý sản phẩm</title>
+    <title>Thùng rác</title>
 </head>
 <body>
     {{>nav}}
-    <h3 class = "mb-3 mt-3" style = "margin-left: 40px">
-        Quản lý sản phẩm
-    </h3>
-    <a class = "mb-3 mt-3 garbage-link" href = 'garbage' style = "margin-left: 80px">Thùng rác  ({{count_products_deleted}})</a>
     {{#if products}}
     <table class="table mx-auto manage-table">
-        <col style = "width: 10%">
+        <col style = "width: 5%">
         <col style = "width: 20%">
         <col style = "width: 20%">
         <col style = "width: 25%">
         <col style = "width: 10%">
-        <col style = "width: 15%">
+        <col style = "width: 20%">
         <thead>
             <tr>
                 <th scope="col">STT</th>
@@ -30,6 +26,7 @@
             </tr>
         </thead>
         <tbody>
+            
             {{#each products}}
             <tr>
                 <th scope="row">{{sum @index 1}}</th>
@@ -38,16 +35,18 @@
                 <td>{{this.name}}</td>
                 <td>{{this.color}}</td>
                 <td class = "link-td d-flex">
-                    <a href="manage/{{this._id}}/edit" class = "edit-link text-primary linkE">Sửa</a>
-                    <div style = "cursor: pointer" data-id = "{{this._id}}" class = "delete-link text-primary linkE">Xóa</div>
+                    <a href="garbage/{{this._id}}/restore" class = "edit-link text-primary linkE">Khôi phục</a>
+                    <div style = "cursor: pointer" data-id = "{{this._id}}" class = "delete-permanently-link text-primary linkE">Xóa vĩnh viễn</div>
                 </td>
             </tr>
             {{/each}}
   </tbody>
 </table>
 {{else}}
-<p style="text-align: center">Chưa có sản phẩm nào. <span class = "normal-span"><a class = "garbage-link" href="/admin/add">Thêm?</a></span></p>
+<p style = "text-align: center; margin-top: 20px;">Thùng rác rỗng</p>
 {{/if}}
+<form method="POST" class = "deletePermanently-form"></form>
+<a href = "manage" class = "back-to-manage garbage-link">Quay lại quản lý sản phẩm</a>
 <div class="alert-modal modals">
     <div class="alert-table table-modal mx-auto">
         <div class="alert-title title-modal">
@@ -55,20 +54,18 @@
         </div>
         <hr>
         <div class="alert-body body-alert-modal">
-            Bạn có chắc chắn muốn xóa sản phẩm này không?
+            Sau khi xóa vĩnh viễn, không thể phục hồi được sản phẩm
         </div>
         <hr>
         <div class="alert-button button-alert-modal">
             <button class = "btn btn-primary cancel-delete">
                 Hủy
             </button>
-            <button class = "btn btn-danger delete-button">
+            <button class = "btn btn-danger deletePermanently-button">
                 Xóa
             </button>
         </div>
     </div>
 </div>
-<form class = "delete-form" method = "POST"></form>
-
 </body>
 </html>

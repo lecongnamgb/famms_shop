@@ -71,14 +71,16 @@ class Admin {
             product_query, 
             product_typeOfShirt_query,
             product_typeOfTrouser_query,
-            product_typeOfAccessory_query
+            product_typeOfAccessory_query,
+            product.countDocumentsDeleted()
         ])
         .then(([
             user_data,
             product_data,
             product_typeOfShirt_data,
             product_typeOfTrouser_data,
-            product_typeOfAccessory_data
+            product_typeOfAccessory_data,
+            count_products_deleted
         ]) => {
             user_information.findOne({username: user_data.username})
             .then(userInfo_data => {
@@ -88,8 +90,81 @@ class Admin {
                 products: multipleMongooseToObject(product_data),
                 product_typeOfShirts: arrayToObject(product_typeOfShirt_data),
                 product_typeOfTrousers: arrayToObject(product_typeOfTrouser_data),
-                product_typeOfAccessories: arrayToObject(product_typeOfAccessory_data)
+                product_typeOfAccessories: arrayToObject(product_typeOfAccessory_data),
+                count_products_deleted
             })})
+        })
+    }
+
+    deleteTemporary(req, res, next) {
+        product.delete({
+            _id: req.params.id
+        })
+        .then(() => {
+            res.redirect('back');
+        }).catch(err => {
+            res.json(err);
+        })
+    }
+
+    garbage(req, res, next) {
+        let user_query = user.findOne({is_admin: true});
+        let product_typeOfShirt_query = product.find({
+            category: "Áo"
+        }).distinct('type');
+        let product_typeOfTrouser_query = product.find({
+            category: "Quần"
+        }).distinct('type');
+        let product_typeOfAccessory_query = product.find({
+            category: "Phụ kiện"
+        }).distinct('type');
+        let product_query = product.findDeleted().sort({
+            "category": -1, 
+            "type": -1, 
+            "name": -1, 
+            "color": -1
+        });
+
+        Promise.all([
+            user_query, 
+            product_query, 
+            product_typeOfShirt_query,
+            product_typeOfTrouser_query,
+            product_typeOfAccessory_query,
+        ])
+        .then(([
+            user_data,
+            product_data,
+            product_typeOfShirt_data,
+            product_typeOfTrouser_data,
+            product_typeOfAccessory_data,
+        ]) => {
+            user_information.findOne({username: user_data.username})
+            .then(userInfo_data => {
+            res.render('admin/garbage', {
+                user: mongooseToObject(user_data),
+                user_information: mongooseToObject(userInfo_data),
+                products: multipleMongooseToObject(product_data),
+                product_typeOfShirts: arrayToObject(product_typeOfShirt_data),
+                product_typeOfTrousers: arrayToObject(product_typeOfTrouser_data),
+                product_typeOfAccessories: arrayToObject(product_typeOfAccessory_data),
+            })})
+        })
+    }
+
+    forceDelete(req, res, next) {
+        product.deleteOne({
+            _id: req.params.id
+        }).then(() => {
+            res.redirect('back');
+        })
+    }
+
+    restore(req, res, next) {
+        product.restore({
+            _id: req.params.id
+        }).then(() => {
+            res.redirect('back');
         })
     }
 

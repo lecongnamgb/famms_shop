@@ -317,8 +317,6 @@ a {
   margin-top: 100px;
   border-radius: 20px;
   text-align: center;
-  animation: animatetop;
-  animation-duration: 0.4s;
 }
 
 @keyframes animatetop {
@@ -330,8 +328,19 @@ a {
   }
 }
 
+@keyframes animate-modals-bottom {
+  from {
+    bottom: 100px;
+  }
+  to {
+    bottom: 80px;
+  }
+}
+
 .logInAndLogOut-table {
   max-width: 600px;
+  animation: animatetop;
+  animation-duration: 0.4s;
 }
 
 .box-modal {
@@ -855,4 +864,57 @@ li {
 
 table {
   text-align: center;
+}
+
+.title-modal {
+  font-weight: bold;
+  font-size: 20px;
+  padding-left: 20px;
+}
+
+.alert-body {
+  padding-left: 20px;
+  margin-bottom: 70px;
+}
+
+.alert-table {
+  text-align: unset;
+  width: 400px;
+  animation: animate-modals-bottom;
+  animation-duration: 0.5s;
+  bottom: 80px;
+}
+
+.alert-button button {
+  float: right;
+}
+
+.delete-button {
+  margin-right: 20px;
+}
+
+.alert-button {
+  min-height: 50px;
+}
+
+.cancel-delete {
+  margin-right: 20px;
+}
+
+.garbage-link {
+  color: blue;
+  text-decoration: underline;
+}
+
+.garbage-link:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
+.back-to-manage {
+  margin-left: 80px;
+}
+
+.deletePermanently-button {
+  margin-right: 20px;
 }

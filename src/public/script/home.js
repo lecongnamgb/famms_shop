@@ -275,6 +275,32 @@ $('.modifyPw-link').click(() => {
     $('.modifyPw-main').toggle(200);
 })
 
+var productId;
+
+function showAndHide(modal, showLink, hideLink) {
+    $(showLink).click((e) => {
+        $(modal).show();
+        productId = $(e.target).attr('data-id');
+        console.log(productId);
+    })
+    $(hideLink).click(() => {
+        $(modal).hide();
+    })
+}
+
+$('.delete-button').click(() => {
+    let formAction = "/admin/manage/" + productId + "?_method=DELETE";
+    $('.delete-form').attr("action",formAction);
+    $('.delete-form').submit();
+})
+$('.deletePermanently-button').click(() => {
+    let formAction = "/admin/garbage/" + productId + "/forceDelete?_method=DELETE";
+    $('.deletePermanently-form').attr("action", formAction);
+    $('.deletePermanently-form').submit();
+})
+showAndHide('.alert-modal','.delete-link','.cancel-delete');
+showAndHide('.alert-modal','.delete-permanently-link','.cancel-delete');
+
 showAndHideComponent('.signIn-link','.logIn');
 showAndHideComponent('.logIn-link','.signIn');
 showAndHideComponent('.forgetPw-link','.logIn');
