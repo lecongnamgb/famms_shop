@@ -18,6 +18,8 @@ searchBtn.click(() => {
     }
 })
 
+
+
 function setCookie(cname, cvalue, exdays) {
     const d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -111,6 +113,8 @@ if($('.sale-select').val() == "true") {
     $('.saledPrice').attr("required", true);
 }
 
+$('.main_img-input').val($('.first-side-img img').attr("src"));
+
 showOption('.category-select');
 showOption('.color-select');
 
@@ -150,6 +154,10 @@ $('.collection-select').on('change', () => {
     }
 })
 
+var src_firstSideImg = $('.first-side-img img').attr('src');
+
+$('.product_main_img img').attr("src", src_firstSideImg);
+
 $('.close-logInAndLogOut').click(() => {
     $('.forgetPw').hide();
     $('.signIn').hide();
@@ -185,13 +193,22 @@ $("body").click(e => {
     } while(targetElement)
     element.classList.remove('show');
 })
-  
 
+$('.payment-method-body').click((e) => {
+   let radioUnChecked = $(".paymentMethod-body input[type='radio']");
+   parentUnchecked = radioUnChecked.parent().parent();
+   parentUnchecked.removeClass('checked-input');
+   let radioChecked = $(".paymentMethod-body input[type='radio']:checked");
+   let parentRadio = radioChecked.parent().parent();
+   parentRadio.addClass('checked-input');
+})
 $('.type1 p').click(() => {
    $('.type1DropDown').toggle();
    $('.type2DropDown').hide();
    $('.type3DropDown').hide();
 })
+
+
 
 $('.type2 p').click(() => {
     $('.type1DropDown').hide()
@@ -266,6 +283,12 @@ $('.plus').click(() => {
     value = parseInt(value);
     value++;
     $('.quantity-input').val(value);
+    if (value == 1) {
+    var price = Number($('.sellPrice').text().slice(0, $('.sellPrice').text().length-5)) * Number($('.quantity-input').val());
+    } else {
+        var price = Number($('.gt_double_price').text()) * Number($('.quantity-input').val());
+    }
+    $('.price-input').val(price);
 })
 
 $('.minus').click(() => {
@@ -275,6 +298,19 @@ $('.minus').click(() => {
         value--;
     }
     $('.quantity-input').val(value);
+    if (value == 1) {
+        var price = Number($('.sellPrice').text().slice(0, $('.sellPrice').text().length-5)) * Number($('.quantity-input').val());
+    } else {
+        var price = Number($('.gt_double_price').text()) * Number($('.quantity-input').val());
+    }
+    $('.price-input').val(price);
+})
+
+var price = Number($('.sellPrice').text().slice(0, $('.sellPrice').text().length-5));
+    $('.price-input').val(price);
+
+$('.logIn-button').click(() => {
+    fetch()
 })
 
 $('.size-list').click((e) => {
@@ -313,7 +349,6 @@ function showAndHide(modal, showLink, hideLink) {
     $(showLink).click((e) => {
         $(modal).show();
         productId = $(e.target).attr('data-id');
-        console.log(productId);
     })
     $(hideLink).click(() => {
         $(modal).hide();
@@ -339,6 +374,33 @@ $('.side-img img').click( (e) => {
     }
     $(e.target).addClass('show-up');
 })
+
+$('.color-input').val(
+    $('.chosen-color img').attr("value")
+)
+
+var priceProduct = $('.priceProduct');
+var totalPrice = 0;
+for (var i = 0; i < priceProduct.length; i++) {
+    var priceEachProduct = priceProduct[i].innerHTML;
+    totalPrice += Number(priceEachProduct.slice(0,priceEachProduct.length - 5));
+}
+$('.product-fee').text(totalPrice + ".000đ");
+
+if (totalPrice > 300) {
+    $('.ship-fee').text('0đ');
+    var product_discount = Math.floor(totalPrice * 0.2);
+    $('.product-discount').text(product_discount + ".000đ");
+} else {
+    $('.ship-fee').text('25.000đ');
+    $('.product-discount').text('0đ');
+}
+
+var product_fee = Number($('.product-fee').text().slice(0,$('.product-fee').text().length - 5));
+var ship_fee = Number($('.ship-fee').text().slice(0,$('.ship-fee').text().length - 5));
+var discount_fee = Number($('.product-discount').text().slice(0, $('.product-discount').text().length - 5 ));
+$('.total-fee').text(product_fee + ship_fee - discount_fee + ".000đ");
+
 showAndHide('.alert-modal','.delete-link','.cancel-delete');
 showAndHide('.alert-modal','.delete-permanently-link','.cancel-delete');
 
@@ -346,4 +408,6 @@ showAndHideComponent('.signIn-link','.logIn');
 showAndHideComponent('.logIn-link','.signIn');
 showAndHideComponent('.forgetPw-link','.logIn');
 showModal('.logInAndLogOut-modal','.userIcon');
+
+
 });

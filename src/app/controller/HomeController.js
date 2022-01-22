@@ -1,6 +1,7 @@
 const user = require('../models/User');
 const user_information = require('../models/User_information');
 const product = require('../models/Product');
+const cart = require('../models/Cart')
 const {mongooseToObject, arrayToObject } = require('../../util/mongoose');
 class HomeController {
     home(req, res, next) {
@@ -106,6 +107,7 @@ class HomeController {
 
     logOut(req, res, next) {
         res.clearCookie('userId');
+        res.clearCookie('is_admin');
         res.redirect('home');
     }
 }

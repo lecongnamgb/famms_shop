@@ -64,6 +64,13 @@ const handlebars = exphbs.create({
           } else {
               return;
           } 
+      },
+      setColor: (color, currentColor) => {
+        if (color == currentColor) {
+            return "chosen-color";
+        } else {
+            return color;
+        }
       }
 
   }

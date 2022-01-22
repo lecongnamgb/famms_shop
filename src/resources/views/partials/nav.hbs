@@ -98,7 +98,7 @@
             </li>
             <li class="nav-item">
                 <div class="userIconDiv item-link text-body" data-user-id = "{{user._id}}">
-                    {{#if user_information.name}}
+                    {{#if user_information.username}}
                     <a href="/profile/{{user._id}}"><i class="far fa-user-circle"></i></a>
                     {{else}}
                     <i class="fas fa-user userIcon"></i>
@@ -125,17 +125,21 @@
             </div>
             <div class="logIn-box  box-modal mx-auto">
                 <div class="title-modal fw-bold ">
-                    Đăng nhập
+                   Đăng nhập
                 </div>
+                {{!-- <div class = "text-danger incorrect-logIn">
+                    Tài khoản hoặc mật khẩu không đúng.
+                </div> --}}
                 <div class="description-modal">
                     Nếu đã từng mua hàng trên Website trước đây, bạn có thể dùng tính năng <span class = "text-primary normal-span forgetPw-link link">"Lấy mật khẩu"</span> để có thể truy cập vào tài khoản bằng email nhé.
                 </div>
                 <div class = "input-modal">
+
                     <form class = "form-sample form-logIn" method = "POST" action = "/profile">
                         <input type="text" name = "username" placeholder="Tài khoản">
                         <br>
                         <input type="password" name = "password" placeholder="Mật khẩu">
-                        <button type = "submit">Đăng nhập</button>
+                        <button class = "logIn-button">Đăng nhập</button>
                     </form>
                 </div>
                 <div>

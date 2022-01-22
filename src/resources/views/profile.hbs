@@ -29,116 +29,169 @@
             </div>
             <div class="col-md-8">
                 <div class="rightSideProfile">
-                    <form method = "POST" action = "/profile/{{user_information._id}}/update?_method=PUT">
-                        <div class="title-account fw-bold">
-                            <p>Thông tin cá nhân</p>
+                    <div class = "userInfo-field">
+                        <form method = "POST" action = "/profile/{{user_information._id}}/update?_method=PUT">
+                            <div class="title-account fw-bold">
+                                <p>Thông tin cá nhân</p>
+                            </div>
+                            <div class="mainRightSide">
+                                <div class="row infoField">
+                                    <div class="col-md-3 label">
+                                        Họ tên
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" name = "name" class = "input-info" placeholder="Họ tên của bạn" required value ="{{user_information.name}}">
+                                    </div> 
+                                </div>
+                                <div class="row infoField">
+                                    <div class="col-md-3 label">
+                                        Email
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" name = "email" class = "input-info" value = {{user_information.email}} placeholder="Email của bạn">
+                                    </div> 
+                                </div>
+                                <div class="row infoField">
+                                    <div class="col-md-3 label">
+                                        Số điện thoại
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" name = "phone_number" class = "input-info" value = "{{user_information.phone_number}}" placeholder="Số điện thoại của bạn" required>
+                                    </div> 
+                                </div>
+                                <div class="row infoField">
+                                    <div class="col-md-3 label">
+                                        Địa chỉ
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" name = "address" class = "input-info" placeholder="Địa chỉ của bạn" required value = "{{user_information.address}}">
+                                    </div> 
+                                </div>
+                                <div class="row infoField">
+                                    <div class="col-md-3 label">
+                                        Giới tính
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="radio" name = "gender" id = "male" value = "male" {{{setGender 'male' user_information.gender}}}>
+                                        <label for="male" class="fw-bold" style = "margin-right: 20px">Nam</label>
+                                        <input type="radio" name = "gender" id = "female" value = "female" {{{setGender 'female' user_information.gender}}}>
+                                        <label for="female" class = "fw-bold">Nữ</label>
+                                    </div> 
+                                </div>
+                                <div class="row infoField">
+                                    <div class="col-md-3 label">
+                                        <p>Ngày sinh</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="date" name = "date_of_birth" class = "input-info dob"  value = "{{{setTime user_information.date_of_birth}}}" >
+                                    </div> 
+                                </div>
+                                <div class="row infoField">
+                                    <div class="col-md-3 label">
+                                        <p>Chiều cao</p>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="range" name = "height" min = "140" max="185" class = "form-range height-range input-info"  value = {{user_information.height}}>
+                                    </div>  
+                                    <div class="col-md-1">
+                                    <label class = "height-range-label">{{user_information.height}}cm</label>
+                                    </div>
+                                </div>
+                                <div class="row infoField">
+                                    <div class="col-md-3 label">
+                                        <p>Cân nặng</p>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="range" name = "weight" min = "40" max="85" class = "form-range weight-range input-info" value = {{user_information.weight}}>
+                                    </div>  
+                                    <div class="col-md-1">
+                                    <label class = "weight-range-label">{{user_information.weight}}kg</label>
+                                    </div>
+                                </div>
+                                <div class = "modifyPw-div">
+                                    <a class = "modifyPw-link text-primary">Thay đổi mật khẩu</a>
+                                    <div class="modifyPw-main">
+                                        <div class="row infoField">
+                                            <div class="col-md-3 label">
+                                                <p>Mật khẩu cũ</p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="password" class = "input-info modifyPw-fields"  name = "oldPw" placeholder="Mật khẩu hiện tại">
+                                            </div> 
+                                        </div>
+                                        <div class="row infoField">
+                                            <div class="col-md-3 label">
+                                                <p>Mật khẩu mới</p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="password" class = "input-info modifyPw-fields" name = "newPw" placeholder="Mật khẩu mới">
+                                            </div> 
+                                        </div>
+                                        <div class="row infoField">
+                                            <div class="col-md-3 label">
+                                                <p>Nhập lại mật khẩu</p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="password" class = "input-info modifyPw-fields" name = "confirmPw" placeholder="Nhập lại mật khẩu">
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type = "submit" class = "submit-info-button btn btn-primary">Cập nhật tài khoản</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class = "orders-field">
+                         <div class="title-account fw-bold">
+                            <p>Đơn hàng của bạn: 4 đơn hàng</p>
                         </div>
-                        <div class="mainRightSide">
-                            <div class="row infoField">
-                                <div class="col-md-3 label">
-                                    Họ tên
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" name = "name" class = "input-info" placeholder="Họ tên của bạn" required value ="{{user_information.name}}">
-                                </div> 
-                            </div>
-                            <div class="row infoField">
-                                <div class="col-md-3 label">
-                                    Email
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" name = "email" class = "input-info" value = {{user_information.email}} placeholder="Email của bạn">
-                                </div> 
-                            </div>
-                            <div class="row infoField">
-                                <div class="col-md-3 label">
-                                    Số điện thoại
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" name = "phone_number" class = "input-info" value = "{{user_information.phone_number}}" placeholder="Số điện thoại của bạn" required>
-                                </div> 
-                            </div>
-                            <div class="row infoField">
-                                <div class="col-md-3 label">
-                                    Địa chỉ
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" name = "address" class = "input-info" placeholder="Địa chỉ của bạn" required value = "{{user_information.address}}">
-                                </div> 
-                            </div>
-                            <div class="row infoField">
-                                <div class="col-md-3 label">
-                                    Giới tính
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="radio" name = "gender" id = "male" value = "male" {{{setGender 'male' user_information.gender}}}>
-                                    <label for="male" class="fw-bold" style = "margin-right: 20px">Nam</label>
-                                    <input type="radio" name = "gender" id = "female" value = "female" {{{setGender 'female' user_information.gender}}}>
-                                    <label for="female" class = "fw-bold">Nữ</label>
-                                </div> 
-                            </div>
-                            <div class="row infoField">
-                                <div class="col-md-3 label">
-                                    <p>Ngày sinh</p>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="date" name = "date_of_birth" class = "input-info dob"  value = "{{{setTime user_information.date_of_birth}}}" >
-                                </div> 
-                            </div>
-                            <div class="row infoField">
-                                <div class="col-md-3 label">
-                                    <p>Chiều cao</p>
-                                </div>
-                                <div class="col-md-7">
-                                    <input type="range" name = "height" min = "140" max="185" class = "form-range height-range input-info"  value = {{user_information.height}}>
-                                </div>  
-                                <div class="col-md-1">
-                                   <label class = "height-range-label">{{user_information.height}}cm</label>
-                                </div>
-                            </div>
-                            <div class="row infoField">
-                                <div class="col-md-3 label">
-                                    <p>Cân nặng</p>
-                                </div>
-                                <div class="col-md-7">
-                                    <input type="range" name = "weight" min = "40" max="85" class = "form-range weight-range input-info" value = {{user_information.weight}}>
-                                </div>  
-                                <div class="col-md-1">
-                                   <label class = "weight-range-label">{{user_information.weight}}kg</label>
-                                </div>
-                            </div>
-                            <div class = "modifyPw-div">
-                                <a class = "modifyPw-link text-primary">Thay đổi mật khẩu</a>
-                                <div class="modifyPw-main">
-                                    <div class="row infoField">
-                                        <div class="col-md-3 label">
-                                            <p>Mật khẩu cũ</p>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <input type="password" class = "input-info modifyPw-fields"  name = "oldPw" placeholder="Mật khẩu hiện tại">
-                                        </div> 
+                        <a class = "order">
+                            <div class="order-title">
+                                <div class="order-box order-box-title">
+                                    <div class="float-start">
+                                        <p class = "id-order fw-bold">#1</p>
+                                        <p class = "time-order">21.12.2021</p>
                                     </div>
-                                    <div class="row infoField">
-                                        <div class="col-md-3 label">
-                                            <p>Mật khẩu mới</p>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <input type="password" class = "input-info modifyPw-fields" name = "newPw" placeholder="Mật khẩu mới">
-                                        </div> 
-                                    </div>
-                                    <div class="row infoField">
-                                        <div class="col-md-3 label">
-                                            <p>Nhập lại mật khẩu</p>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <input type="password" class = "input-info modifyPw-fields" name = "confirmPw" placeholder="Nhập lại mật khẩu">
-                                        </div> 
+                                    <div class="float-end">
+                                        <p class = "state-order">
+                                            <span class = "text-state fw-bold">Đã xác nhận
+                                            </span>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
-                            <button type = "submit" class = "submit-info-button btn btn-primary">Cập nhật tài khoản</button>
-                        </div>
-                    </form>
+                            <div class="order-body">
+                                <div class="order-product">
+                                    <div class="order-box">
+                                        <div class="float-start d-flex">
+                                            <div>
+                                                <img class = "img-order" src="https://mcdn2-coolmate.cdn.vccloud.vn/uploads/November2021/IMG_6920_32_672x990.jpg" alt="">
+                                            </div>
+                                            <div class = "order-product-description">
+                                                <p class = "product-name fw-bold">Áo Hoodie nam có mũ trùm</p>
+                                                <p>x 1</p>
+                                                <p class = "text-primary">Xanh Navy / XL</p>
+                                                <p class = "fw-bold">389.000đ</p>
+                                            </div>
+                                        </div>
+                                        <div class = "float-end">
+                                            <button class = "rate-product">
+                                                <span class = "rate-text">Đánh giá sản phẩm</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="order-box price-field">
+                                    <div class="float-end">
+                                        Tổng đơn hàng: <span class = "fw-bold">598.000đ</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        
+                    </div>
+
+                    
                 </div>
             </div>
         </div>

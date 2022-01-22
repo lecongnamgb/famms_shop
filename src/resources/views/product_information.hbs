@@ -4,97 +4,111 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{{current_product.name}}</title>
 </head>
 <body>
     {{>nav}}
+    <a class = "cart-icon cursor-pointer" href = "/cart">
+        <i class="fas fa-shopping-cart"></i>
+        <div class = "quantity-in-cart">
+            <p>{{quantity_in_cart}}</p>
+        </div>
+    </a>
     <div class="product_info_container mx-auto">
         <div class="product_info_main">
             <div class="row">
                 <div class="col-md-6 product_info_img mx-auto">
                     <div class="product_main_img">
-                        <img src="https://mcdn2-coolmate.cdn.vccloud.vn/uploads/December2021/hoddie24.jpg" style = "width: 600px" alt="">
+                        <img  style = "width: 600px" alt="">
                     </div>
                     <div class="product_side_img">
-                        <div class="side-img">
-                            <img src="https://mcdn2-coolmate.cdn.vccloud.vn/uploads/December2021/hoddie24.jpg" class = "show-up" alt="">
+                        <div class="side-img first-side-img" value = {{product_typeChosen.main_img}}>
+                            <img class = "show-up" src="https://mcdn2-coolmate.cdn.vccloud.vn/uploads/{{product_typeChosen.main_img}}" >
                         </div>
                         <div class="side-img">
-                            <img src="https://mcdn2-coolmate.cdn.vccloud.vn/uploads/December2021/hoddie26.jpg" alt="">
+                            <img src="https://mcdn2-coolmate.cdn.vccloud.vn/uploads/{{product_typeChosen.hover_img}}">
                         </div>
                     </div>
                 </div>
                 <div class="col-md-5 product_description">
                     <div class="product_title">
-                        Áo Polo nam Café
+                        {{current_product.name}}
                     </div>
                     <div class="product_rating">
-                        <i class = "review-rating-star is-active"></i>
-                        <i class = "review-rating-star is-active"></i>
-                        <i class = "review-rating-star is-active"></i>
-                        <i class = "review-rating-star is-active"></i>
-                        <i class = "review-rating-star is-active"></i>
+                        <i class = "review-rating-star {{setStar product_typeChosen.review_star 1}}"></i>
+                        <i class = "review-rating-star {{setStar product_typeChosen.review_star 2}}"></i>
+                        <i class = "review-rating-star {{setStar product_typeChosen.review_star 3}}"></i>
+                        <i class = "review-rating-star {{setStar product_typeChosen.review_star 4}}"></i>
+                        <i class = "review-rating-star {{setStar product_typeChosen.review_star 5}}"></i>
                         <span class = "normal-span review-rating-label">| 100</span>
                     </div>
                     <div class="product-price">
+                        {{#if product_typeChosen.is_sale}}
                         <span class = "currentPrice me-3 price">
-                            299.000đ
+                            <p class = "sellPrice">{{product_typeChosen.price_after_sale}}.000đ</p>
                         </span>
                         <span class = "price_before_sale me-3 price text-muted">
-                            <del>329.000đ</del>
+                            <del>{{product_typeChosen.price_default}}.000đ</del>
                         </span>
                         <span class = "percent_sale text-danger price me-3">
-                            -10%
+                            -{{product_typeChosen.percent_sale}}%
                         </span>
+                        {{else}}
+                         <span class = "currentPrice me-3 price">
+                            <p class = "sellPrice">{{product_typeChosen.price_default}}.000đ</p>
+                        </span>
+                        {{/if}}
                         <br>
                         <div class = "btn btn-outline-primary doubleSale mt-3">
-                            Mua 2 chỉ còn 289k/chiếc
+                            Mua 2 chỉ còn <p class = "gt_double_price">{{product_typeChosen.price_double_sale}}</p>k/chiếc
                         </div>
                     </div>
                     <div>
-                        <span>Màu sắc: </span>
-                        <input type="text" class = "color-input trans-input fw-bold" disabled>
-                        <br>
-                        <div class = "d-flex color-div">
-                            <div class = "color-list">
-                                <img src="https://mcdn2-coolmate.cdn.vccloud.vn/uploads/November2021/4-4_56_80x80.jpg" value = "Đen"  alt="">
+                        <form method = "POST" action = "/product/addToCart">
+                            <span>Màu sắc: </span>
+                            <input type="text" name = "color" class = "color-input trans-input fw-bold dis-input">
+                            <br>
+                        
+                            <div class = "d-flex color-div">
+                                {{#each product_typeChosenColors}}
+                                <a class = "color-list {{setColor ../product_typeChosen.color this.color}}" href = "/product/{{../product_typeChosen.type}}/{{../product_typeChosen.name}}/{{this.color}}">
+                                    <img src="https://mcdn2-coolmate.cdn.vccloud.vn/uploads/{{this.color_img}}" value = "{{this.color}}"  alt="">
+                                </a>
+                                {{/each}}
                             </div>
-                            <div class = "color-list">
-                                <img src="https://mcdn2-coolmate.cdn.vccloud.vn/uploads/November2021/3-4-copy_37_80x80.jpg" value = "Xanh navy" alt="">
+                            <span>Kích thước: </span>
+                            <input type="text" name = "size" value = "S" class = "trans-input size-input fw-bold dis-input">
+                            <div class="d-flex size-div">
+                                <div class="size-list check-size" value = "S">
+                                    S
+                                </div>
+                                <div class="size-list" value = "M">
+                                    M
+                                </div>
+                                <div class="size-list" value = "L">
+                                    L
+                                </div>
+                                <div class="size-list" value = "XL">
+                                    XL
+                                </div>
+                                <div class="size-list" value = "2XL">
+                                    2XL
+                                </div>
                             </div>
-                            <div class = "color-list">
-                                <img src="https://mcdn2-coolmate.cdn.vccloud.vn/uploads/November2021/5-3-copy_79_80x80.jpg" value = "Xám" alt="">
+                            <div class = "d-flex cart-div">
+                                <div class = "quantity-div d-flex">
+                                    <span class = "fw-bold operator minus"> - </span>
+                                    <input type="text" name = "quantity_order" value = "1" class = " fw-bold trans-input quantity-input dis-input">
+                                    <input type="text" name = "name" value = "{{product_typeChosen.name}}" class = "d-none">
+                                    <input type="number" name = "price" class = "d-none price-input">
+                                    <input type="text" name = "main_img" class = "d-none main_img-input">
+                                    <span class = "fw-bold operator plus"> + </span>
+                                </div>
+                                <button type = "submit" class="btn confirmOrder-div">
+                                    Thêm vào giỏ hàng
+                                </button>
                             </div>
-                        </div>
-                        <span>Kích thước: </span>
-                        <input type="text" class = "trans-input size-input fw-bold" disabled>
-                        <div class="d-flex size-div">
-                            <div class="size-list" value = "S">
-                                S
-                            </div>
-                            <div class="size-list" value = "M">
-                                M
-                            </div>
-                            <div class="size-list" value = "L">
-                                L
-                            </div>
-                            <div class="size-list" value = "XL">
-                                XL
-                            </div>
-                            <div class="size-list" value = "2XL">
-                                2XL
-                            </div>
-                        </div>
-                        <div class = "d-flex cart-div">
-                            <div class = "quantity-div d-flex">
-                                <span class = "fw-bold operator minus"> - </span>
-                                <input type="text" value = "1" class = " fw-bold trans-input quantity-input" disabled>
-                                <span class = "fw-bold operator plus"> + </span>
-                            </div>
-                            <div class="confirmOrder-div">
-                                Thêm vào giỏ hàng
-                            </div>
-                        </div>
+                        </form>
                         <div class="features">
                             <div class="row">
                                 <div class="col-md-4">
@@ -177,7 +191,7 @@
                 Đánh giá
             </div>
             <div class="review-header pl-50 d-flex">
-                <select class = "select-review">
+                <select class = "select-review cursor-pointer">
                     <option value = "none">Đánh giá</option>
                     <option value="1-star">1 sao</option>
                     <option value="2-star">2 sao</option>
