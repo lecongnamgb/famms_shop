@@ -383,7 +383,6 @@ a {
 }
 
 .userInfo-field {
-  display: none;
 }
 
 .form-sample button {
@@ -1408,6 +1407,9 @@ p {
   background-color: #ccc;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
+}
+.orders-field {
+  display: none;
 }
 
 .order-box {

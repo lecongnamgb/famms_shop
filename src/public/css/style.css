@@ -311,9 +311,6 @@ a {
   border: 1px solid #ccc;
   border-radius: 18px; }
 
-.userInfo-field {
-  display: none; }
-
 .form-sample button {
   width: 90%;
   background-color: #000;
@@ -1162,6 +1159,9 @@ p {
   background-color: #ccc;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px; }
+
+.orders-field {
+  display: none; }
 
 .order-box {
   padding: 10px 30px; }
